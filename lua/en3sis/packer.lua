@@ -38,6 +38,6 @@ return require('packer').startup(function(use)
             {'hrsh7th/cmp-nvim-lua'},
         }
     }
-    use('brooth/far.vim') 
+    use('brooth/far.vim')
     use("github/copilot.vim")
 end)

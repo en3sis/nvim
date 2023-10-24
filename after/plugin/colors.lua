@@ -1,7 +1,39 @@
 require('rose-pine').setup({
   disable_background = true,
   variant = 'moon',
+  dim_nc_background = false,
   disable_italics = false,
+  disable_float_background=true,
+  groups = {
+		background = 'base',
+		background_nc = '_experimental_nc',
+		panel = 'surface',
+		panel_nc = 'base',
+		border = 'highlight_med',
+		comment = 'muted',
+		link = 'iris',
+		punctuation = 'subtle',
+
+		error = 'love',
+		hint = 'iris',
+		info = 'foam',
+		warn = 'gold',
+
+		-- or set all headings at once
+		-- headings = 'subtle'
+	},
+  highlight_groups = {
+		ColorColumn = { bg = 'moon' },
+
+		-- Blend colours against the "base" background
+		CursorLine = { bg = 'foam', blend = 10 },
+		StatusLine = { fg = 'love', bg = 'love', blend = 10 },
+
+		-- By default each group adds to the existing config.
+		-- If you only want to set what is written in this config exactly,
+		-- you can set the inherit option:
+		Search = { bg = 'gold', inherit = false },
+	}
 })
 
 function ColorMyPencils(color) 

@@ -41,6 +41,7 @@ return require('packer').startup(function(use)
   use('brooth/far.vim')
   use('nvimdev/guard.nvim')
   use('nvimdev/guard-collection')
+  use('lewis6991/gitsigns.nvim')
   use("github/copilot.vim")
   use 'nvim-telescope/telescope-project.nvim'
 end)

@@ -26,7 +26,7 @@ require('rose-pine').setup({
 		ColorColumn = { bg = 'moon' },
 
 		-- Blend colours against the "base" background
-		CursorLine = { bg = 'foam', blend = 10 },
+		CursorLine = { bg = 'love', blend = 10 },
 		StatusLine = { fg = 'love', bg = 'love', blend = 10 },
 
 		-- By default each group adds to the existing config.

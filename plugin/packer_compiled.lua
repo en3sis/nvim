@@ -114,6 +114,16 @@ _G.packer_plugins = {
     path = "/Users/en3sis/.local/share/nvim/site/pack/packer/start/far.vim",
     url = "https://github.com/brooth/far.vim"
   },
+  ["guard-collection"] = {
+    loaded = true,
+    path = "/Users/en3sis/.local/share/nvim/site/pack/packer/start/guard-collection",
+    url = "https://github.com/nvimdev/guard-collection"
+  },
+  ["guard.nvim"] = {
+    loaded = true,
+    path = "/Users/en3sis/.local/share/nvim/site/pack/packer/start/guard.nvim",
+    url = "https://github.com/nvimdev/guard.nvim"
+  },
   harpoon = {
     loaded = true,
     path = "/Users/en3sis/.local/share/nvim/site/pack/packer/start/harpoon",
@@ -163,6 +173,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/en3sis/.local/share/nvim/site/pack/packer/start/rose-pine",
     url = "https://github.com/rose-pine/neovim"
+  },
+  ["telescope-project.nvim"] = {
+    loaded = true,
+    path = "/Users/en3sis/.local/share/nvim/site/pack/packer/start/telescope-project.nvim",
+    url = "https://github.com/nvim-telescope/telescope-project.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,

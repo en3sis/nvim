@@ -1,10 +1,19 @@
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>ev", vim.cmd.Ex)
 vim.keymap.set("n", "Q", "<nop>")
+
 -- Moves half-page
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
--- Moves selected content UP/DOWN 
+
+-- Moves selected content UP/DOWN
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("n", "J", "mzJ`z")
+-- next greatest remap ever : asbjornHaland
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
+vim.keymap.set("n", "<leader>Y", [["+Y]])
+vim.keymap.set("x", "<leader>p", [["_dP]])
+
+vim.keymap.set("i", "<C-c>", "<Esc>")
+vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)

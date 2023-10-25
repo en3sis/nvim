@@ -1,5 +1,5 @@
 vim.opt.guicursor = ""
-
+vim.clipboard = 'unnamedplus'
 vim.opt.nu = true
 vim.opt.relativenumber = true
 

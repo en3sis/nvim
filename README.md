@@ -116,3 +116,4 @@ This document outlines the keybindings grouped by their categories for easy refe
 
 https://github.com/airblade/vim-gitgutter
 https://github.com/brenoprata10/nvim-highlight-colors
+https://github.com/folke/todo-comments.nvim

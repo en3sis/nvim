@@ -95,6 +95,7 @@ This document outlines the keybindings grouped by their categories for easy refe
 
 - `<leader>gc`: Git commit.
 - `<leader>gp`: Git push.
+- `<leader>gs`: Git status.
 
 ## Split Windows
 
@@ -114,6 +115,4 @@ This document outlines the keybindings grouped by their categories for easy refe
 ## Other pugins
 
 https://github.com/airblade/vim-gitgutter
-
-
-
+https://github.com/brenoprata10/nvim-highlight-colors

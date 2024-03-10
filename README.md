@@ -1,116 +1,92 @@
-# Keybindings Reference
+MOST COMMONS:
 
-This document outlines the keybindings grouped by their categories for easy reference.
+Diagnostics and Linting:
 
-## Most Commons
+<leader>vd: Open diagnostic float.
+Navigation and File Management:
 
-- `<leader>vd`: Open diagnostic float.
-- `<C-h/t/n/s>`: Navigate Harpoon files.
-- `<leader>a`: Add file to Harpoon.
-- `<leader>y`: Copy to clipboard.
-- `Ctrl+o`: Goes back (previous file).
-- `gd`: Go to definition.
-- `ggVG`: Selects whole file.
-- `<leader>es`: Grep for name.
-- `Ctrl+V` -> `Shift I` -> `//`: Comment whole block.
-- `Shift-K`: Shows floating Definition.
-- `<leader>U`: Shows UndotreeToggle.
-- `Shift + I/A` -> Beginning & end of line Insert.
-- `*`: Sets current element as search pattern.
-  - `n`: Moves to the next occurrence.
+<C-h/t/n/s>: Navigate Harpoon files.
+<leader>a: Add file to Harpoon.
+Ctrl+o: Go back (previous file).
+<leader>ef: Find files.
+C+p: Find files (all).
+C+w+=: Make split windows equal.
+C-v: Go to file section as a split.
+C-t: Go to a file in a new tab.
+Code Navigation:
 
-## Edit Text
+gd: Go to definition.
+<leader>es: Grep for name.
+Shift-K: Show floating definition.
+Selection and Editing:
 
-- `:%s/from/to` or `<leader>s`: Replace text from 'from' to 'to'.
-- `r`: Select and replace at selection.
-- `D`: Removes everything to the end of the cursor.
+ggVG: Select whole file.
+Ctrl+V -> Shift I -> //: Comment whole block.
+Shift + I/A: Beginning and end of line insert.
+*: Set current element as search pattern.
+n: Move to the next occurrence.
+f<char>: Move to character, F for backward.
+vit: Select inside tag (HTML).
+Clipboard and Yanking:
 
-## Motions
+<leader>y: Copy to clipboard.
+Version Control and Git:
 
-- `VI`: Visual Inside.
-- `VA`: Visual Around.
-- `w`: Move forward by a word.
-- `b`: Move backwards by a word.
-- `vip`: Select paragraphs.
-- `vi {(<…`: Selects all in between the specified characters.
-- `va {(`: Selects all including the specified characters.
-- `vaW`: Selects all to whitespace.
-- `V`: Selects whole line.
-- `ggVG`: Selects whole file.
-- `viw`: Select the word, no matter where in the word's position.
-- `yiW`: Yank inside word including punctuation.
-- `yow`: Yank all continued text (e.g., `some::long::string`).
-- `ciW`: Deletes continued text and enters insert mode.
-- `ctrl + o`: Jumps back on jumps.
-- `ci “({`: Jumps and replace between specified characters.
+<leader>u: Show UndotreeToggle (GitHub).
+General:
 
-## Moves Half-Page
+<leader>p: Paste from clipboard
+<C-c> (in insert mode): Escape to normal mode
+Navigation:
 
-- `<C-d>`: Move half-page down.
-- `<C-u>`: Move half-page up.
+<C-d>: Move half-page down
+<C-u>: Move half-page up
+N: Moves to the prev (occurrence)
+;: Repeat the last f, F, t, or T motion (forward)
+,: Repeat the last f, F, t, or T motion (backward)
+Editing:
 
-## Moves Selected Content UP/DOWN
+r: Replace the character under the cursor
+D: Remove everything from the cursor to the end of the line
+:%s/from/to or <leader>s: Replace text from 'from' to 'to'
+ciW: Change (delete and enter insert mode) inside the current word
+ci"({: Change (delete and enter insert mode) inside the specified characters
+vi{(<...: Select inside the specified characters
+va{(: Select around the specified characters
+vaW: Select all text until the next whitespace
+vip: Select the current paragraph
+viw: Select the current word
+yiW: Yank (copy) the current word including punctuation
+yow: Yank (copy) the current "word" (consecutive text)
+J (in visual mode): Join the selected lines
+K (in visual mode): Move the selected text up
+J (in normal mode): Join the current line with the next one, without spacing
 
-- `v mode J`: Move selected content down.
-- `v mode K`: Move selected content up.
-- `n mode J`: Join lines without spacing.
+LSP (Language Server Protocol):
 
-## Clipboard Operations
+<leader>vws: Search workspace symbols
+\[d and \]d: Navigate diagnostics
+<leader>vca: Show code actions
+<leader>vrr: Show references
+<leader>F2: Rename symbol
+K: Hover to see details
+<C-n> and <C-p> (in insert mode): Navigate suggestions
+<C-h> (in insert mode): Show signature help
+Git:
 
-- `<leader>y`: Copy to clipboard.
-- `<leader>Y`: Copy whole line to clipboard.
-- `<leader>p`: Paste from clipboard.
+<leader>gc: Git commit
+<leader>gp: Git push
+Windows:
 
-## Miscellaneous
+C-w-h / C-w-v: Move to a split horizontally/vertically
+C-x: Split window horizontally
+Miscellaneous:
 
-- `<C-c>` in insert mode: Escape to normal mode.
-- `<leader>f`: Format document with LSP.
-- `<leader>s`: Replace the current word with input.
+<leader>f: Format the current document
+Treesitter:
 
-## Harpoon
-
-- `<leader>a`: Add file to Harpoon.
-- `<C-e>`: Toggle Harpoon quick menu.
-- `C-v`: Split window vertically.
-- `C-x`: Split window horizontally.
-- `C-t`: Open a new tab.
-- `<C-h/t/n/s>`: Navigate Harpoon files.
-
-## LSP
-
-- `C-n`: Navigate suggestion down.
-- `C-p`: Navigate suggestion up.
-- `Ctrl+o`: Goes back (previous file).
-- `gd`: Go to definition.
-- `K`: Hover to see details.
-- `<leader>vws`: Search workspace symbols.
-- `<leader>vd`: Open diagnostic float.
-- `[d` and `]d`: Navigate diagnostics.
-- `<leader>vca`: Show code actions.
-- `<leader>vrr`: Show references.
-- `<leader>F2`: Rename symbol.
-- `<C-h>` in insert mode: Show signature help.
-
-## Git
-
-- `<leader>gc`: Git commit.
-- `<leader>gp`: Git push.
-- `<leader>gs`: Git status.
-
-## Split Windows
-
-- `C-w-h/C-w-v`: Move to split horizontally/vertically.
-- `<leader>vd`: Opens diagnostics.
-- `<leader>f`: Format document.
-- `<leader>s`: Renames the current word.
-
-## Treesitter
-
-- `D`: New directory.
-- `%`: New file.
-- `R`: Rename file.
-
-
+D: Create a new directory
+%: Create a new file
 
 ## Other pugins
 

@@ -13,6 +13,8 @@ vim.opt.smartindent = true
 
 vim.opt.wrap = true
 vim.opt.linebreak = true
+-- vim.opt.winblend = 90
+
 
 vim.opt.swapfile = false
 vim.opt.backup = false

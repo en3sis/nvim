@@ -1,6 +1,7 @@
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>ev", vim.cmd.Ex)
 vim.keymap.set("n", "Q", "<nop>")
+vim.keymap.set("n", "<D-q>", "<nop>")
 
 -- Moves half-page
 vim.keymap.set("n", "<C-d>", "<C-d>zz")

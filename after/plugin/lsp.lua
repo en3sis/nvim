@@ -12,6 +12,8 @@ lsp_zero.on_attach(function(client, bufnr)
   vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
   vim.keymap.set("n", "<F2>", function() vim.lsp.buf.rename() end, opts)
   vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+  vim.cmd('highlight NormalFloat guibg=#1c1c1c')
+
 end)
 
 require("lspconfig.ui.windows").default_options.border = "double"

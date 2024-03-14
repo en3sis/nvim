@@ -53,5 +53,15 @@ return require('packer').startup(function(use)
   use {
     'folke/todo-comments.nvim',
     requires = 'nvim-lua/plenary.nvim',
-   }
+  }
+  use {
+    'VonHeikemen/fine-cmdline.nvim',
+    requires = {
+      { 'MunifTanjim/nui.nvim' }
+    }
+  }
+  use {
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  }
 end)

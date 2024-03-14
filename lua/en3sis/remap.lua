@@ -2,6 +2,9 @@ vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>ev", vim.cmd.Ex)
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<D-q>", "<nop>")
+-- vim.api.nvim_set_keymap('n', '<CR>', '<cmd>FineCmdline<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', ':', '<cmd>FineCmdline<CR>', {noremap = true})
+
 
 -- Moves half-page
 vim.keymap.set("n", "<C-d>", "<C-d>zz")

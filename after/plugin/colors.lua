@@ -38,7 +38,7 @@ require('rose-pine').setup({
     --FloatBorder = { fg = 'rose', bg = 'rose' },
 
     -- Customize the appearance of floating windows
-    -- NormalFloat = { bg = 'base', blend = 0 },
+    NormalFloat = { bg = 'base', blend = 0 },
     -- Add background to floating window
     -- Float = { bg = 'base' },
   }

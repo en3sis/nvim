@@ -19,7 +19,7 @@ end)
 require("lspconfig.ui.windows").default_options.border = "double"
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  ensure_installed = { 'rust_analyzer' },
+  ensure_installed = { 'rust_analyzer', 'eslint', 'tsserver' },
   handlers = {
     lsp_zero.default_setup,
     lua_ls = function()

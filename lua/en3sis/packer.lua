@@ -23,7 +23,14 @@ return require('packer').startup(function(use)
       -- config goes here
     end,
   }
-  use('ThePrimeagen/vim-be-good')
+  --   use {
+  --     'chipsenkbeil/distant.nvim',
+  --     branch = 'v0.3',
+  --     config = function()
+  --       require('distant'):setup()
+  --     end
+  --   }
+  --   use('ThePrimeagen/vim-be-good')
   use {
     'VonHeikemen/lsp-zero.nvim',
     branch = 'v3.x',
@@ -40,6 +47,7 @@ return require('packer').startup(function(use)
       { 'hrsh7th/cmp-buffer' },
       { 'hrsh7th/cmp-path' },
       { 'hrsh7th/cmp-nvim-lua' },
+      { 'hrsh7th/cmp-nvim-lsp-signature-help' },
       { 'saadparwaiz1/cmp_luasnip' },
       { 'L3MON4D3/LuaSnip' },
     }
@@ -50,6 +58,8 @@ return require('packer').startup(function(use)
   use('lewis6991/gitsigns.nvim')
   use("github/copilot.vim")
   use 'nvim-telescope/telescope-project.nvim'
+  use 'simrat39/rust-tools.nvim'
+  --use 'mrcjkb/rustaceanvim'
   use {
     'folke/todo-comments.nvim',
     requires = 'nvim-lua/plenary.nvim',

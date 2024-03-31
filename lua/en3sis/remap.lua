@@ -4,7 +4,7 @@ vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<D-q>", "<nop>")
 -- vim.api.nvim_set_keymap('n', '<CR>', '<cmd>FineCmdline<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', ':', '<cmd>FineCmdline<CR>', {noremap = true})
-
+vim.api.nvim_set_keymap('n', '<C-m>', '<Nop>', { noremap = true })
 
 -- Moves half-page
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
@@ -26,4 +26,8 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 -- Git
 vim.api.nvim_set_keymap("n", "<leader>gc", ":Git commit -m \"", {noremap=false})
 vim.api.nvim_set_keymap("n", "<leader>gp", ":Git push -u origin HEAD<CR>", {noremap=false})
+
+vim.keymap.set('n', "Db", ":call vimspector#ToggleBreakpoint()<cr>")
+vim.keymap.set('n', "Dw", ":call vimspector#AddWatch()<cr>")
+vim.keymap.set('n', "De", ":call vimspector#Evaluate()<cr>")
 

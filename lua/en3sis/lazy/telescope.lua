@@ -5,7 +5,12 @@ return {
   },
 
   config = function()
-    require('telescope').setup({})
+    require('telescope').setup({
+      defaults = {
+        color_devicons = true,
+        disable_devicons = false,
+      }
+    })
 
     local builtin = require('telescope.builtin')
     vim.keymap.set('n', '<leader>ef', builtin.find_files, {})

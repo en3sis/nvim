@@ -9,7 +9,8 @@ return {
       defaults = {
         color_devicons = true,
         disable_devicons = false,
-      }
+        color_icons = true,
+      },
     })
 
     local builtin = require('telescope.builtin')

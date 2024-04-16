@@ -13,8 +13,9 @@ vim.opt.smartindent = true
 
 vim.opt.wrap = true
 vim.opt.linebreak = true
--- vim.opt.winblend = 90
-
+-- vim.opt.winblend = 20
+-- set transparent background to floating windows
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 
 vim.opt.swapfile = false
 vim.opt.backup = false
@@ -33,4 +34,9 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "90"
 
-
+-- Enable highlight when yanking
+vim.api.nvim_create_autocmd("TextYankPost", {
+  callback = function()
+    vim.highlight.on_yank { higroup = "IncSearch", timeout = 200 }
+  end
+})

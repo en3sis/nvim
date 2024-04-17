@@ -31,6 +31,9 @@ vim.keymap.set("n", "<leader>ga", function()
 end)
 vim.keymap.set("n", "gh", "<cmd>diffget //2<CR>")
 vim.keymap.set("n", "gl", "<cmd>diffget //3<CR>")
+-- Moves to the next/previous 
+vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
+vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
 
 -- VIM Inspector
 vim.keymap.set('n', "Db", ":call vimspector#ToggleBreakpoint()<cr>")

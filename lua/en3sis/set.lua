@@ -15,7 +15,9 @@ vim.opt.wrap = true
 vim.opt.linebreak = true
 -- vim.opt.winblend = 20
 -- set transparent background to floating windows
-vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+--vim.api.nvim_set_hl(1, "NormalFloat", { bg = "black" })
+-- set border for floating windows
+--vim.api.nvim_set_option("winhighlight", "NormalFloat:Normal")
 
 vim.opt.swapfile = false
 vim.opt.backup = false

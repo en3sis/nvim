@@ -47,12 +47,12 @@ return {
           Search = { bg = 'gold', fg = 'black', inherit = false },
 
           -- Add a border to floating windows
-          -- FloatBorder = { fg = 'rose', bg = 'rose' },
+          --FloatBorder = { fg = 'gold', bg = 'gold' },
 
           -- Customize the appearance of floating windows
-          NormalFloat = { bg = 'gold', blend = 80, inherit = false},
+          NormalFloat = { bg = 'gold', blend = 0, inherit = true},
           -- Add background to floating window
-          Float = { bg = 'love', blend = 80, inherit = false},
+          Float = { bg = 'love', blend = 0, inherit = true},
         }
       })
 

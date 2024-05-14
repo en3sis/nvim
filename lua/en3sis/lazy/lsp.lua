@@ -1,3 +1,7 @@
+local ELLIPSIS_CHAR = '…'
+local MAX_LABEL_WIDTH = 20
+local MIN_LABEL_WIDTH = 20
+
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
@@ -89,7 +93,52 @@ return {
     })
 
     local cmp_select = { behavior = cmp.SelectBehavior.Select }
+    -- https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua for more options
+    -- https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/window.lua for more options
     cmp.setup({
+      formatting = {
+        format = function(entry, vim_item)
+          local label = vim_item.abbr
+          local truncated_label = vim.fn.strcharpart(label, 0, MAX_LABEL_WIDTH)
+          if truncated_label ~= label then
+            vim_item.abbr = truncated_label .. ELLIPSIS_CHAR
+          elseif string.len(label) < MIN_LABEL_WIDTH then
+            local padding = string.rep(' ', MIN_LABEL_WIDTH - string.len(label))
+            vim_item.abbr = label .. padding
+          end
+          return vim_item
+        end,
+      },
+      performance = {
+        -- max_view_entries = 10,
+      },
+      view = {
+        entries = {
+          name = 'custom',
+          selection_order = '',
+          follow_cursor = false,
+        },
+        docs = {
+          auto_open = true,
+        },
+      },
+      window = {
+        documentation = cmp.config.window.bordered({
+          border = "rounded",
+          max_width = 0,
+        }),
+        completion = cmp.config.window.bordered(),
+      },
+      sorting = {
+        comparators = {
+          cmp.config.compare.offset,
+          cmp.config.compare.exact,
+          cmp.config.compare.score,
+          cmp.config.compare.recently_used,
+          --require("cmp-under-comparator").under,
+          cmp.config.compare.kind,
+        },
+      },
       snippet = {
         expand = function(args)
           require('luasnip').lsp_expand(args.body) -- For `luasnip` users.

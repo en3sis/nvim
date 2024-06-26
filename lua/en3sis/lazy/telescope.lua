@@ -11,6 +11,9 @@ return {
         disable_devicons = false,
         color_icons = true,
       },
+      find_files = {
+        hidden = true,
+      },
     })
 
     local builtin = require('telescope.builtin')

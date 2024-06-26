@@ -1,8 +1,10 @@
 function ColorMyPencils(color)
   color = color or "rose-pine"
   vim.cmd.colorscheme(color)
-  vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-  vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+  if color == "rose-pine" then
+    vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+    vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+  end
 end
 
 return {
@@ -50,14 +52,34 @@ return {
           --FloatBorder = { fg = 'gold', bg = 'gold' },
 
           -- Customize the appearance of floating windows
-          NormalFloat = { bg = 'gold', blend = 0, inherit = true},
+          NormalFloat = { bg = 'gold', blend = 0, inherit = true },
           -- Add background to floating window
-          Float = { bg = 'love', blend = 0, inherit = true},
+          Float = { bg = 'love', blend = 0, inherit = true },
         }
       })
 
-      vim.cmd("colorscheme rose-pine")
-      ColorMyPencils()
+      --vim.cmd("colorscheme rose-pine")
+      --ColorMyPencils()
     end
   },
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
+    config = function()
+      require('catppuccin').setup({
+        flavour = "latte", -- latte, frappe, macchiato, mocha
+        background = {     -- :h background
+          light = "latte",
+          dark = "mocha",
+        },
+        transparent_background = true, -- disables setting the background color.
+        show_end_of_buffer = false,    -- shows the '~' characters after the end of buffers
+        term_colors = true,            -- sets terminal colors (e.g. `g:terminal_color_0`)
+      })
+      --vim.cmd("colorscheme catppuccin-latte")
+      ColorMyPencils("catppuccin-latte")
+    end
+  },
+
 }

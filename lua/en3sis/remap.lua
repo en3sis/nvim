@@ -2,6 +2,7 @@ vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>ev", vim.cmd.Ex)
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<D-q>", "<nop>")
+vim.keymap.set("n", "<Ctrl-a>", "<nop>")
 vim.api.nvim_set_keymap('n', '<CR>', '<nop>', {noremap = true})
 vim.api.nvim_set_keymap('n', ':', '<cmd>FineCmdline<CR>', {noremap = true})
 --vim.keymap.set("n", "<C-m>", "<nop>")
@@ -20,6 +21,7 @@ vim.keymap.set("x", "<leader>p", [["_dP]])
 
 -- Disable F1 for help
 vim.api.nvim_set_keymap('n', '<F1>', '<nop>', {noremap = true})
+vim.api.nvim_set_keymap('i', '<F1>', '<nop>', {noremap = true})
 vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
@@ -42,6 +44,8 @@ vim.keymap.set('n', "Db", ":call vimspector#ToggleBreakpoint()<cr>")
 vim.keymap.set('n', "Dw", ":call vimspector#AddWatch()<cr>")
 vim.keymap.set('n', "De", ":call vimspector#Evaluate()<cr>")
 
+-- Markdown
+vim.keymap.set("n", "<leader>mm", "<cmd>RenderMarkdownToggle<cr>")
 
 -- Undotree
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)

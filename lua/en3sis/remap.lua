@@ -22,6 +22,8 @@ vim.keymap.set("x", "<leader>p", [["_dP]])
 -- Disable F1 for help
 vim.api.nvim_set_keymap('n', '<F1>', '<nop>', {noremap = true})
 vim.api.nvim_set_keymap('i', '<F1>', '<nop>', {noremap = true})
+
+vim.api.nvim_set_keymap('n', ']d', '<nop>', {noremap = true})
 vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])

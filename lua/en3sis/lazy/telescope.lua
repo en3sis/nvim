@@ -10,9 +10,12 @@ return {
         color_devicons = true,
         disable_devicons = false,
         color_icons = true,
+        file_ignore_patterns = { "^%.git/", "^node_modules/" }, -- Ignore .git and node_modules directories
       },
-      find_files = {
-        hidden = true,
+       pickers = {
+        find_files = {
+          hidden = true, -- Show hidden files in find_files picker
+        },
       },
     })
 

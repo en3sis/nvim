@@ -28,5 +28,9 @@ return {
         -- vim.keymap.set("n", "<leader>t", ":Git push -u origin ", opts);
       end,
     })
-  end
+  end,
+   {
+    "tpope/vim-rhubarb",
+    dependencies = { "tpope/vim-fugitive" }
+  }
 }

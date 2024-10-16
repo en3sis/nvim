@@ -4,6 +4,9 @@ return {
   dependencies = { 'nvim-treesitter/nvim-treesitter' },
   config = function()
     require('render-markdown').setup({
+
+      file_types = { 'markdown', 'Avante'},
+
       code = {
         border = 'thin',
         -- Used above code blocks for thin border

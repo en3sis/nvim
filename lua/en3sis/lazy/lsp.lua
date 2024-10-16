@@ -31,23 +31,75 @@ return {
     lsp_zero.on_attach(function(client, bufnr)
       local opts = { buffer = bufnr, remap = false }
 
-      vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-      vim.keymap.set("n", "<leader>vr", function() vim.lsp.buf.references() end, opts)
-      vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
+      -- Diagnostics
       vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
-      vim.keymap.set("n", '<leader>gr', function() require('telescope.builtin').lsp_references() end,
-        { noremap = true, silent = true })
-      vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
       vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
       vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
-      vim.keymap.set("n", "<F3>", function() vim.lsp.buf.code_action() end, opts)
-      vim.keymap.set("n", "<F2>", function() vim.lsp.buf.rename() end, opts)
-      vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
-      -- vim.cmd('highlight NormalFloat guibg=#1c1c1c')
-      -- New keybindings for implementation and references
+      vim.keymap.set("n", "<leader>vdw", function() vim.diagnostic.setqflist({ open = true }) end, opts)
+      vim.keymap.set("n", "<leader>vdf", function()
+        vim.diagnostic.setqflist({ open = true, title = "Diagnostics for current file", bufnr = 0 })
+      end, opts)
+
+      -- Definitions and References
+      vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
+      vim.keymap.set("n", "gr", function() vim.lsp.buf.references() end, opts)
       vim.keymap.set("n", "gi", function() vim.lsp.buf.implementation() end, opts)
-      vim.keymap.set("n", "<leader>fr", function() require('telescope.builtin').lsp_references() end, opts)
+      -- vim.keymap.set("n", "<leader>vr", function() vim.lsp.buf.references() end, opts)
+
+      -- Workspace
+      vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
+
+      -- Hover and Information
+      vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
+      vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+
+      -- Code Actions and Refactoring
+      vim.keymap.set("n", "<F2>", function() vim.lsp.buf.rename() end, opts)
+      vim.keymap.set("n", "<F3>", function() vim.lsp.buf.code_action() end, opts)
+      vim.keymap.set("n", "<F4>", function()
+        vim.cmd("w") -- Save the file first
+        local filename = vim.fn.expand("%:p")
+        local cmd = string.format("eslint --fix %s", filename)
+        vim.fn.jobstart(cmd, {
+          on_exit = function(_, exit_code)
+            if exit_code == 0 then
+              vim.notify("ESLint fix applied successfully", vim.log.levels.INFO)
+              vim.cmd("e") -- Reload the file
+            else
+              vim.notify("ESLint fix failed", vim.log.levels.ERROR)
+            end
+          end
+        })
+      end, opts)
+
+      -- Telescope Integration
+      vim.keymap.set("n", '<leader>gr', function() require('telescope.builtin').lsp_references() end,
+        { noremap = true, silent = true })
+      -- vim.keymap.set("n", "<leader>fr", function() require('telescope.builtin').lsp_references() end, opts)
       vim.keymap.set("n", "<leader>fi", function() require('telescope.builtin').lsp_implementations() end, opts)
+
+      -- LSP Zero old keybindings
+      -- vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
+      -- vim.keymap.set("n", "<leader>vr", function() vim.lsp.buf.references() end, opts)
+      -- vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
+      -- vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
+      -- vim.keymap.set("n", '<leader>gr', function() require('telescope.builtin').lsp_references() end,
+      --   { noremap = true, silent = true })
+      -- vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
+      -- vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
+      -- vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
+      -- vim.keymap.set("n", "<F3>", function() vim.lsp.buf.code_action() end, opts)
+      -- vim.keymap.set("n", "<F2>", function() vim.lsp.buf.rename() end, opts)
+      -- vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+      -- -- vim.cmd('highlight NormalFloat guibg=#1c1c1c')
+      -- -- New keybindings for implementation and references
+      -- vim.keymap.set("n", "gi", function() vim.lsp.buf.implementation() end, opts)
+      -- vim.keymap.set("n", "<leader>fr", function() require('telescope.builtin').lsp_references() end, opts)
+      -- vim.keymap.set("n", "<leader>fi", function() require('telescope.builtin').lsp_implementations() end, opts)
+      --   -- New keybinding to show diagnostics in quickfix list
+      -- vim.keymap.set("n", "<leader>qf", function()
+      --   vim.diagnostic.setqflist({open = true})
+      -- end, opts)
     end)
 
     require("fidget").setup({})
@@ -183,8 +235,67 @@ return {
             end,
           })
         end,
+
+        ["denols"] = function()
+          local lspconfig = require("lspconfig")
+          lspconfig.denols.setup({
+            capabilities = capabilities,
+            root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
+            init_options = {
+              lint = true,
+              unstable = true,
+              suggest = {
+                imports = {
+                  hosts = {
+                    ["https://deno.land"] = true,
+                    ["https://cdn.nest.land"] = true,
+                    ["https://crux.land"] = true
+                  }
+                }
+              }
+            },
+            settings = {
+              deno = {
+                enable = true,
+                suggest = {
+                  imports = {
+                    autoDiscover = true
+                  }
+                }
+              }
+            }
+          })
+        end,
       }
     })
+
+    -- Setup lspconfig comparator for cmp
+    local lspkind_comparator = function(conf)
+      local lsp_types = require('cmp.types').lsp
+      return function(entry1, entry2)
+        if entry1.source.name ~= 'nvim_lsp' then
+          if entry2.source.name == 'nvim_lsp' then
+            return false
+          else
+            return nil
+          end
+        end
+        local kind1 = lsp_types.CompletionItemKind[entry1:get_kind()]
+        local kind2 = lsp_types.CompletionItemKind[entry2:get_kind()]
+
+        local priority1 = conf.kind_priority[kind1] or 0
+        local priority2 = conf.kind_priority[kind2] or 0
+        if priority1 == priority2 then
+          return nil
+        end
+        return priority2 < priority1
+      end
+    end
+
+    local label_comparator = function(entry1, entry2)
+      return entry1.completion_item.label < entry2.completion_item.label
+    end
+    -- end of setup lspconfig comparator for cmp
 
     local cmp_select = { behavior = cmp.SelectBehavior.Select }
     -- https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua for more options
@@ -225,13 +336,45 @@ return {
       },
       sorting = {
         comparators = {
-          cmp.config.compare.offset,
-          cmp.config.compare.exact,
-          cmp.config.compare.score,
-          cmp.config.compare.recently_used,
-          --require("cmp-under-comparator").under,
-          cmp.config.compare.kind,
+          lspkind_comparator({
+            kind_priority = {
+              Field = 11,
+              Property = 11,
+              Constant = 10,
+              Enum = 10,
+              EnumMember = 10,
+              Event = 10,
+              Function = 10,
+              Method = 10,
+              Operator = 10,
+              Reference = 10,
+              Struct = 10,
+              Variable = 9,
+              File = 8,
+              Folder = 8,
+              Class = 5,
+              Color = 5,
+              Module = 5,
+              Keyword = 2,
+              Constructor = 1,
+              Interface = 1,
+              Snippet = 0,
+              Text = 1,
+              TypeParameter = 1,
+              Unit = 1,
+              Value = 1,
+            },
+          }),
+          label_comparator,
         },
+        -- comparators = {
+        --   cmp.config.compare.offset,
+        --   cmp.config.compare.exact,
+        --   cmp.config.compare.score,
+        --   cmp.config.compare.recently_used,
+        --   --require("cmp-under-comparator").under,
+        --   cmp.config.compare.kind,
+        -- },
       },
       snippet = {
         expand = function(args)

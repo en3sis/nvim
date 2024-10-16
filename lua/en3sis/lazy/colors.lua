@@ -1,5 +1,5 @@
 function SetTheme(color)
-  color = color or "rose-pine"
+  color = color or "rose-pine-moon"
   vim.cmd.colorscheme(color)
   vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
   vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
@@ -12,10 +12,10 @@ return {
     config = function()
       require('rose-pine').setup({
         disable_background = true,
-        --variant = 'moon',
-        variant = 'auto',
+        variant = 'moon',
+        -- variant = 'auto',
         light_variant = 'dawn',
-        dark_variant = 'moon',
+        -- dark_variant = 'moon',
         extend_background_behind_borders = true,
         dim_nc_background = false,
         disable_italics = true,
@@ -73,11 +73,13 @@ return {
           -- Add background to floating window
           Float = { bg = 'love', blend = 0, inherit = true },
           StatusLineNC = { fg = "subtle", bg = "surface" },
+          -- Customize the appearance of the cursor
+          CursorWord = { underline = true },
         }
       })
 
-      SetTheme("rose-pine-dawn")
-      --SetTheme()
+      -- SetTheme("rose-pine-dawn")
+      SetTheme()
     end
   },
   {
@@ -96,7 +98,7 @@ return {
         term_colors = true,            -- sets terminal colors (e.g. `g:terminal_color_0`)
       })
 
-      --SetTheme("catppuccin-latte")
+      -- SetTheme("catppuccin-latte")
     end
   },
 }

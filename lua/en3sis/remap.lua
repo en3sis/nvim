@@ -22,6 +22,7 @@ vim.keymap.set("x", "<leader>p", [["_dP]])
 -- Disable F1 for help
 vim.api.nvim_set_keymap('n', '<F1>', '<nop>', {noremap = true})
 vim.api.nvim_set_keymap('i', '<F1>', '<nop>', {noremap = true})
+vim.api.nvim_set_keymap('n', 'C-l', '<nop>', {noremap = true})
 
 vim.api.nvim_set_keymap('n', ']d', '<nop>', {noremap = true})
 vim.keymap.set("i", "<C-c>", "<Esc>")

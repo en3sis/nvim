@@ -1,6 +1,7 @@
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>ev", vim.cmd.Ex)
 vim.keymap.set("n", "Q", "<nop>")
+vim.keymap.set("n", "gd", "<nop>")
 vim.keymap.set("n", "<D-q>", "<nop>")
 vim.keymap.set("n", "<Ctrl-a>", "<nop>")
 vim.api.nvim_set_keymap('n', '<CR>', '<nop>', {noremap = true})

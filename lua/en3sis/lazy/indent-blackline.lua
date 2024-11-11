@@ -5,14 +5,14 @@ return {
   config = function()
     require("mini.indentscope").setup({
       symbol = "│",
-      options = { try_as_border = true },
+      options = { try_as_border = true, border= "both"},
       draw = {
-        delay = 100,
-        animation = require('mini.indentscope').gen_animation.none()
+        animation = require('mini.indentscope').gen_animation.none(),
+        priority = 2
       },
     })
 
-    vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { fg = "#F16E93" })
+    -- vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { fg = "#F16E93" })
 
 
     -- Disable for certain filetypes

@@ -13,7 +13,7 @@ return {
     "hrsh7th/cmp-cmdline",
     "hrsh7th/nvim-cmp",
     "L3MON4D3/LuaSnip",
-    "saadparwaiz1/cmp_luasnip",
+    -- "saadparwaiz1/cmp_luasnip",
     "j-hui/fidget.nvim",
     { 'VonHeikemen/lsp-zero.nvim', branch = 'v3.x' }
   },
@@ -44,7 +44,6 @@ return {
       vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
       vim.keymap.set("n", "gr", function() vim.lsp.buf.references() end, opts)
       vim.keymap.set("n", "gi", function() vim.lsp.buf.implementation() end, opts)
-      -- vim.keymap.set("n", "<leader>vr", function() vim.lsp.buf.references() end, opts)
 
       -- Workspace
       vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
@@ -56,27 +55,27 @@ return {
       -- Code Actions and Refactoring
       vim.keymap.set("n", "<F2>", function() vim.lsp.buf.rename() end, opts)
       vim.keymap.set("n", "<F3>", function() vim.lsp.buf.code_action() end, opts)
-      vim.keymap.set("n", "<F4>", function()
-        vim.cmd("w") -- Save the file first
-        local filename = vim.fn.expand("%:p")
-        local cmd = string.format("eslint --fix %s", filename)
-        vim.fn.jobstart(cmd, {
-          on_exit = function(_, exit_code)
-            if exit_code == 0 then
-              vim.notify("ESLint fix applied successfully", vim.log.levels.INFO)
-              vim.cmd("e") -- Reload the file
-            else
-              vim.notify("ESLint fix failed", vim.log.levels.ERROR)
-            end
-          end
-        })
-      end, opts)
+      -- vim.keymap.set("n", "<F4>", function()
+      --   vim.cmd("w") -- Save the file first
+      --   local filename = vim.fn.expand("%:p")
+      --   local cmd = string.format("eslint --fix %s", filename)
+      --   vim.fn.jobstart(cmd, {
+      --     on_exit = function(_, exit_code)
+      --       if exit_code == 0 then
+      --         vim.notify("ESLint fix applied successfully", vim.log.levels.INFO)
+      --         vim.cmd("e") -- Reload the file
+      --       else
+      --         vim.notify("ESLint fix failed", vim.log.levels.ERROR)
+      --       end
+      --     end
+      --   })
+      -- end, opts)
 
       -- Telescope Integration
-      vim.keymap.set("n", '<leader>gr', function() require('telescope.builtin').lsp_references() end,
-        { noremap = true, silent = true })
+      -- vim.keymap.set("n", '<leader>gr', function() require('telescope.builtin').lsp_references() end,
+      --   { noremap = true, silent = true })
       -- vim.keymap.set("n", "<leader>fr", function() require('telescope.builtin').lsp_references() end, opts)
-      vim.keymap.set("n", "<leader>fi", function() require('telescope.builtin').lsp_implementations() end, opts)
+      -- vim.keymap.set("n", "<leader>fi", function() require('telescope.builtin').lsp_implementations() end, opts)
 
       -- LSP Zero old keybindings
       -- vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
@@ -376,11 +375,11 @@ return {
         --   cmp.config.compare.kind,
         -- },
       },
-      snippet = {
-        expand = function(args)
-          require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-        end,
-      },
+      -- snippet = {
+      --   expand = function(args)
+      --     require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+      --   end,
+      -- },
       mapping = cmp.mapping.preset.insert({
         ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
         ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),

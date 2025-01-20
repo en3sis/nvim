@@ -2,6 +2,15 @@ local ELLIPSIS_CHAR = '…'
 local MAX_LABEL_WIDTH = 20
 local MIN_LABEL_WIDTH = 20
 
+local codeActionPriorities = {
+  ["source.organizeImports.go"] = 100,
+  ["source.fixAll"] = 90,
+  ["source.addMissingImports"] = 89,
+  ["quickfix.next"] = 80,
+  ["refactor"] = 70,
+}
+
+
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
@@ -20,6 +29,7 @@ return {
   config = function()
     local cmp = require('cmp')
     local cmp_lsp = require("cmp_nvim_lsp")
+
     local capabilities = vim.tbl_deep_extend(
       "force",
       {},
@@ -55,50 +65,6 @@ return {
       -- Code Actions and Refactoring
       vim.keymap.set("n", "<F2>", function() vim.lsp.buf.rename() end, opts)
       vim.keymap.set("n", "<F3>", function() vim.lsp.buf.code_action() end, opts)
-      -- vim.keymap.set("n", "<F4>", function()
-      --   vim.cmd("w") -- Save the file first
-      --   local filename = vim.fn.expand("%:p")
-      --   local cmd = string.format("eslint --fix %s", filename)
-      --   vim.fn.jobstart(cmd, {
-      --     on_exit = function(_, exit_code)
-      --       if exit_code == 0 then
-      --         vim.notify("ESLint fix applied successfully", vim.log.levels.INFO)
-      --         vim.cmd("e") -- Reload the file
-      --       else
-      --         vim.notify("ESLint fix failed", vim.log.levels.ERROR)
-      --       end
-      --     end
-      --   })
-      -- end, opts)
-
-      -- Telescope Integration
-      -- vim.keymap.set("n", '<leader>gr', function() require('telescope.builtin').lsp_references() end,
-      --   { noremap = true, silent = true })
-      -- vim.keymap.set("n", "<leader>fr", function() require('telescope.builtin').lsp_references() end, opts)
-      -- vim.keymap.set("n", "<leader>fi", function() require('telescope.builtin').lsp_implementations() end, opts)
-
-      -- LSP Zero old keybindings
-      -- vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-      -- vim.keymap.set("n", "<leader>vr", function() vim.lsp.buf.references() end, opts)
-      -- vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
-      -- vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
-      -- vim.keymap.set("n", '<leader>gr', function() require('telescope.builtin').lsp_references() end,
-      --   { noremap = true, silent = true })
-      -- vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-      -- vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
-      -- vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
-      -- vim.keymap.set("n", "<F3>", function() vim.lsp.buf.code_action() end, opts)
-      -- vim.keymap.set("n", "<F2>", function() vim.lsp.buf.rename() end, opts)
-      -- vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
-      -- -- vim.cmd('highlight NormalFloat guibg=#1c1c1c')
-      -- -- New keybindings for implementation and references
-      -- vim.keymap.set("n", "gi", function() vim.lsp.buf.implementation() end, opts)
-      -- vim.keymap.set("n", "<leader>fr", function() require('telescope.builtin').lsp_references() end, opts)
-      -- vim.keymap.set("n", "<leader>fi", function() require('telescope.builtin').lsp_implementations() end, opts)
-      --   -- New keybinding to show diagnostics in quickfix list
-      -- vim.keymap.set("n", "<leader>qf", function()
-      --   vim.diagnostic.setqflist({open = true})
-      -- end, opts)
     end)
 
     require("fidget").setup({})
@@ -109,7 +75,7 @@ return {
         "rust_analyzer",
         "gopls",
         'eslint',
-        'ts_ls'
+        'ts_ls',
       },
       handlers = {
         function(server_name) -- default handler (optional)
@@ -165,6 +131,37 @@ return {
                 completeFunctionCalls = true
               }
             }
+          })
+        end,
+
+        ["gopls"] = function()
+          local lspconfig = require("lspconfig")
+          lspconfig.gopls.setup({
+            capabilities = capabilities,
+            settings = {
+              gopls = {
+                analyses = {
+                  unusedparams = true,     -- Detect unused parameters
+                  unusedwrite = true,      -- Detect unused writes
+                  unusedvariable = true,   -- Detect unused variables
+                },
+                staticcheck = true,        -- Enable staticcheck analysis
+                usePlaceholders = true,    -- Use placeholders for function parameters
+                completeUnimported = true, -- Enable completion for unimported packages
+                gofumpt = true,            -- Enable stricter formatting (optional)
+              },
+            },
+            on_attach = function(client, bufnr)
+              -- Enable auto-formatting on save for Go files
+              vim.api.nvim_create_autocmd("BufWritePre", {
+                pattern = "*.go",
+                callback = function()
+                  vim.lsp.buf.format({ async = false })
+                  -- Organize imports on save
+                  vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" } }, apply = true })
+                end,
+              })
+            end,
           })
         end,
 

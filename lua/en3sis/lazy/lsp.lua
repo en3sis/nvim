@@ -2,15 +2,6 @@ local ELLIPSIS_CHAR = '…'
 local MAX_LABEL_WIDTH = 20
 local MIN_LABEL_WIDTH = 20
 
-local codeActionPriorities = {
-  ["source.organizeImports.go"] = 100,
-  ["source.fixAll"] = 90,
-  ["source.addMissingImports"] = 89,
-  ["quickfix.next"] = 80,
-  ["refactor"] = 70,
-}
-
-
 return {
   "neovim/nvim-lspconfig",
   dependencies = {

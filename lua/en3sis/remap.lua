@@ -6,7 +6,7 @@ vim.keymap.set("n", "<D-q>", "<nop>")
 vim.keymap.set("n", "<Ctrl-a>", "<nop>")
 vim.api.nvim_set_keymap('n', '<CR>', '<nop>', {noremap = true})
 vim.api.nvim_set_keymap('n', ':', '<cmd>FineCmdline<CR>', {noremap = true})
---vim.keymap.set("n", "<C-m>", "<nop>")
+vim.keymap.set("n", "<C-m>", "<nop>", {noremap = true})
 -- Moves half-page
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")

@@ -61,11 +61,12 @@ return {
     require("fidget").setup({})
     require("mason").setup()
     require("mason-lspconfig").setup({
+      -- automatic_enable = false, -- Enable after Neovim is updated to 0.11.
       ensure_installed = {
         "lua_ls",
         "rust_analyzer",
         "gopls",
-        -- 'eslint',
+        'eslint',
         'ts_ls',
       },
       handlers = {

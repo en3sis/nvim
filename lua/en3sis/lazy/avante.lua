@@ -2,13 +2,15 @@ return {
   "yetone/avante.nvim",
   event = "VeryLazy",
   lazy = false,
-  version = false, -- set this if you want to always pull the latest change
+  version = false,
   opts = {
-    -- add any opts here
+    -- Add Claude concise response configuration
+    response_format = {
+      concise = true,               -- Enable concise responses
+      code_block_style = "minimal", -- Use minimal style for code blocks
+    }
   },
-  -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
   build = "make",
-  -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
   dependencies = {
     "nvim-treesitter/nvim-treesitter",
     "stevearc/dressing.nvim",

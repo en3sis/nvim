@@ -65,7 +65,7 @@ return {
         "lua_ls",
         "rust_analyzer",
         "gopls",
-        'eslint',
+        -- 'eslint',
         'ts_ls',
       },
       handlers = {

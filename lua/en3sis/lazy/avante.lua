@@ -4,6 +4,7 @@ return {
   lazy = false,
   version = false,
   opts = {
+    provider = "copilot",
     -- Add Claude concise response configuration
     response_format = {
       concise = true,               -- Enable concise responses

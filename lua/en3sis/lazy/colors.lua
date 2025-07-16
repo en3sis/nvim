@@ -78,8 +78,8 @@ return {
         }
       })
 
-      -- SetTheme("rose-pine-dawn")
-      SetTheme()
+      SetTheme("rose-pine-dawn")
+      -- SetTheme()
     end
   },
   -- {

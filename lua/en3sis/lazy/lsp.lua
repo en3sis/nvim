@@ -109,7 +109,15 @@ return {
                   globals = { "vim", "it", "describe", "before_each", "after_each" },
                 }
               }
-            }
+            },
+            on_attach = function(client, bufnr)
+              vim.api.nvim_create_autocmd("BufWritePre", {
+                pattern = "*.lua",
+                callback = function()
+                  vim.lsp.buf.format({ async = false })
+                end,
+              })
+            end,
           }
         end,
 
@@ -143,17 +151,6 @@ return {
                 gofumpt = true,            -- Enable stricter formatting (optional)
               },
             },
-            on_attach = function(client, bufnr)
-              -- Enable auto-formatting on save for Go files
-              vim.api.nvim_create_autocmd("BufWritePre", {
-                pattern = "*.go",
-                callback = function()
-                  vim.lsp.buf.format({ async = false })
-                  -- Organize imports on save
-                  vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" } }, apply = true })
-                end,
-              })
-            end,
           })
         end,
 

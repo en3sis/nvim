@@ -22,7 +22,7 @@ return {
         disable_float_background = true,
         groups = {
           --background = 'base',
-          background = 'none',
+          background = '#ffffff',
           background_nc = '_experimental_nc',
           panel = 'surface',
           panel_nc = 'base',
@@ -78,7 +78,8 @@ return {
         }
       })
 
-      SetTheme("rose-pine-dawn")
+      SetTheme("rose-pine-moon")
+      -- SetTheme("rose-pine-dawn")
       -- SetTheme()
     end
   },

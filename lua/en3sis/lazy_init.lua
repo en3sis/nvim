@@ -16,6 +16,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     spec = "en3sis.lazy",
     change_detection = { notify = false },
+    rocks = { enabled = false },
     performance = {
       rtp = {
         disabled_plugins = { "gzip", "tarPlugin", "zipPlugin", "tohtml", "tutor" },

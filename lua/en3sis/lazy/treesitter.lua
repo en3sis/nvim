@@ -1,6 +1,8 @@
 local ENSURE_INSTALLED = {
   "vimdoc", "javascript", "typescript", "tsx", "c", "lua", "rust",
   "jsdoc", "bash", "markdown", "markdown_inline", "html", "nginx", "go", "templ",
+  "json", "yaml", "toml", "css", "scss", "dockerfile", "python", "make", "sql",
+  "diff", "gitcommit", "terraform", "prisma",
 }
 
 local KEEP_REGEX_SYNTAX = { markdown = true, go = true }

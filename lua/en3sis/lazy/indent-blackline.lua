@@ -1,7 +1,7 @@
 return {
   "echasnovski/mini.indentscope",
   version = false, -- use latest version
-  lazy = false,
+  event = { "BufReadPost", "BufNewFile" },
   config = function()
     require("mini.indentscope").setup({
       symbol = "│",

@@ -1,5 +1,7 @@
 return {
   'MeanderingProgrammer/markdown.nvim',
+  ft = { "markdown", "Avante" },
+  cmd = { "RenderMarkdown", "RenderMarkdownToggle" },
   --name = 'render-markdown', -- Only needed if you have another plugin named markdown.nvim
   dependencies = { 'nvim-treesitter/nvim-treesitter' },
   config = function()

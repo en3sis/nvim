@@ -1,5 +1,6 @@
 return {
   'VonHeikemen/fine-cmdline.nvim',
+  cmd = "FineCmdline",
   dependencies = {
     { 'MunifTanjim/nui.nvim' }
   },

@@ -4,6 +4,7 @@ local MIN_LABEL_WIDTH = 20
 
 return {
   "neovim/nvim-lspconfig",
+  event = { "BufReadPre", "BufNewFile", "CmdlineEnter" },
   dependencies = {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",

@@ -14,86 +14,94 @@ return {
       return icon .. ' ' .. filepath .. '/' .. filename
     end
 
-    local custom_theme = {
-      normal = {
-        a = { fg = '#ffffff', bg = '#1a1b26', bold = true },
-        b = { fg = '#ffffff', bg = '#16161e' },
-        c = { fg = '#ffffff', bg = '#1a1b26' },
-      },
-      insert = {
-        a = { fg = '#1a1b26', bg = '#7aa2f7', bold = true },
-        b = { fg = '#7aa2f7', bg = '#16161e' },
-      },
-      visual = {
-        a = { fg = '#1a1b26', bg = '#bb9af7', bold = true },
-        b = { fg = '#bb9af7', bg = '#16161e' },
-      },
-      command = {
-        a = { fg = '#1a1b26', bg = '#e0af68', bold = true },
-        b = { fg = '#e0af68', bg = '#16161e' },
-      },
-    }
-
-    require('lualine').setup {
-      options = {
-        icons_enabled = true,
-        theme = custom_theme,
-        component_separators = { left = '', right = ''},
-        section_separators = { left = '', right = ''},
-        disabled_filetypes = {
-          statusline = {},
-          winbar = {},
-        },
-        ignore_focus = {},
-        always_divide_middle = true,
-        globalstatus = false,
-        refresh = {
-          statusline = 1000,
-          tabline = 1000,
-          winbar = 1000,
+    local function build_theme()
+      local p = require("en3sis.theme").palette()
+      local function mode(color)
+        return {
+          a = { fg = p.on_accent, bg = color, gui = "bold" },
+          b = { fg = p.fg, bg = p.line },
+          c = { fg = p.sub, bg = p.bg },
         }
-      },
-      sections = {
-        lualine_a = {'mode'},
-        lualine_b = {'branch', 'diff', 'diagnostics'},
-        lualine_c = {
-          {
-            filename_with_icon,
-            file_status = true,
-            path = 1,
-            symbols = {
-              modified = ' [+]',
-              readonly = ' [-]',
-              unnamed = '[No Name]',
-            }
+      end
+      return {
+        normal = mode(p.accent),
+        insert = mode(p.green),
+        visual = mode(p.magenta),
+        replace = mode(p.red),
+        command = mode(p.yellow),
+        inactive = {
+          a = { fg = p.muted, bg = p.bg },
+          b = { fg = p.muted, bg = p.bg },
+          c = { fg = p.muted, bg = p.bg },
+        },
+      }
+    end
+
+    local function setup()
+      require('lualine').setup {
+        options = {
+          icons_enabled = true,
+          theme = build_theme(),
+          component_separators = { left = '', right = '' },
+          section_separators = { left = '', right = '' },
+          disabled_filetypes = {
+            statusline = {},
+            winbar = {},
           },
-          {
-            function()
-              local size = vim.fn.getfsize(vim.fn.expand('%:p'))
-              if size < 0 then return '' end
-              if size < 1024 then return size .. 'B' end
-              if size < 1024 * 1024 then return string.format('%.1fKB', size / 1024) end
-              return string.format('%.1fMB', size / (1024 * 1024))
-            end,
-            color = { fg = '#bb9af7' }
+          ignore_focus = {},
+          always_divide_middle = true,
+          globalstatus = false,
+          refresh = {
+            statusline = 1000,
+            tabline = 1000,
+            winbar = 1000,
           }
         },
-        lualine_x = {'encoding', 'fileformat', 'filetype'},
-        lualine_y = {'progress'},
-        lualine_z = {'location'}
-      },
-      inactive_sections = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = {'filename'},
-        lualine_x = {'location'},
-        lualine_y = {},
-        lualine_z = {}
-      },
-      tabline = {},
-      winbar = {},
-      inactive_winbar = {},
-      extensions = {}
-    }
+        sections = {
+          lualine_a = {'mode'},
+          lualine_b = {'branch', 'diff', 'diagnostics'},
+          lualine_c = {
+            {
+              filename_with_icon,
+              file_status = true,
+              path = 1,
+              symbols = {
+                modified = ' [+]',
+                readonly = ' [-]',
+                unnamed = '[No Name]',
+              }
+            },
+            {
+              function()
+                local size = vim.fn.getfsize(vim.fn.expand('%:p'))
+                if size < 0 then return '' end
+                if size < 1024 then return size .. 'B' end
+                if size < 1024 * 1024 then return string.format('%.1fKB', size / 1024) end
+                return string.format('%.1fMB', size / (1024 * 1024))
+              end,
+              color = function() return { fg = require("en3sis.theme").palette().muted } end
+            }
+          },
+          lualine_x = {'encoding', 'fileformat', 'filetype'},
+          lualine_y = {'progress'},
+          lualine_z = {'location'}
+        },
+        inactive_sections = {
+          lualine_a = {},
+          lualine_b = {},
+          lualine_c = {'filename'},
+          lualine_x = {'location'},
+          lualine_y = {},
+          lualine_z = {}
+        },
+        tabline = {},
+        winbar = {},
+        inactive_winbar = {},
+        extensions = {}
+      }
+    end
+
+    setup()
+    vim.api.nvim_create_autocmd("ColorScheme", { callback = setup })
   end
 }

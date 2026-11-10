@@ -80,9 +80,17 @@ return {
         }
       })
 
+      vim.o.background = require("en3sis.theme").system_background()
+      vim.cmd.colorscheme("en3sis")
+      -- SetTheme("rose-pine-dawn")
       -- SetTheme("rose-pine-moon")
-      SetTheme("rose-pine-dawn")
-      -- SetTheme()
+
+      vim.api.nvim_create_autocmd("OptionSet", {
+        pattern = "background",
+        callback = function()
+          if vim.g.colors_name == "en3sis" then vim.cmd.colorscheme("en3sis") end
+        end,
+      })
     end
   },
   -- {
